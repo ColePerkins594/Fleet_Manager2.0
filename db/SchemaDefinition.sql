@@ -21,6 +21,18 @@ CREATE TYPE user_role as ENUM(
     'MECHANIC'
 );
 
+CREATE TYPE user_status as ENUM(
+    'ACTIVE',
+    'INACTIVE',
+    'ON LEAVE'
+);
+
+CREATE TYPE vehicle_status as ENUM(
+    'OUT OF SERVICE',
+    'ON A JOB',
+    'AVAILABLE',
+);
+
 CREATE TYPE channel AS ENUM(
     'EMAIL',
     'PHONE-SMS',
@@ -60,6 +72,7 @@ CREATE TABLE "user"(
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
     role user_role NOT NULL,
+    status user_status NOT NULL,
     age int NOT NULL,
     addr user_address NOT NULL,
     account_id INTEGER REFERENCES account (account_id)
@@ -83,8 +96,9 @@ CREATE TABLE vehicle(
     drivetrain drivetrain_type NOT NULL,
     efficiency VARCHAR(20),
     range REAL,
+    license_plate VARCHAR(15) NOT NULL,
     uptime REAL NOT NULL,
-    in_use BOOLEAN NOT NULL,
+    status vehicle_status NOT NULL,
     insert_date TIMESTAMP NOT NULL,
     account_id INTEGER REFERENCES account (account_id)
 );
@@ -108,6 +122,15 @@ CREATE TABLE issue(
     resolved_time TIMESTAMP,
     service_record_id INTEGER REFERENCES service_record (service_record_id),
     vehicle_id VARCHAR(17) REFERENCES vehicle (vin)
+);
+
+CREATE TABLE job(
+    job_id SERIAL PRIMARY KEY,
+    description TEXT NOT NULL,
+    start_time TIMESTAMP NOT NULL,
+    end_time TIMESTAMP,
+    vehicle_id VARCHAR(17) REFERENCES vehicle (vin),
+    operator_id INTEGER REFERENCES "user" (user_id)
 );
 
 --Association tables
