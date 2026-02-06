@@ -30,7 +30,7 @@ CREATE TYPE user_status as ENUM(
 CREATE TYPE vehicle_status as ENUM(
     'OUT OF SERVICE',
     'ON A JOB',
-    'AVAILABLE',
+    'AVAILABLE'
 );
 
 CREATE TYPE channel AS ENUM(
