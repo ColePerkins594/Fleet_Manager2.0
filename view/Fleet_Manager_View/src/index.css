@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    @apply bg-white text-gray-900;
+    font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color-scheme: light dark;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  :root.dark {
+    @apply bg-dark-900 text-white;
+  }
+
+  body {
+    @apply m-0 min-h-screen;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-4 py-2 bg-primary-600 text-white font-medium rounded-lg hover:bg-primary-700 transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-dark-900;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-4 py-2 bg-gray-200 text-gray-900 font-medium rounded-lg hover:bg-gray-300 transition-colors dark:bg-dark-700 dark:text-white dark:hover:bg-dark-600;
+  }
+
+  .card {
+    @apply bg-white dark:bg-dark-800 rounded-lg shadow-md dark:shadow-dark-800 border border-gray-200 dark:border-dark-700 transition-shadow hover:shadow-lg;
+  }
+
+  .sidebar-link {
+    @apply flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-primary-50 dark:hover:bg-dark-700 rounded-lg transition-colors;
+  }
+
+  .sidebar-link.active {
+    @apply bg-primary-100 dark:bg-primary-900 text-primary-700 dark:text-primary-300 font-medium;
+  }
+}

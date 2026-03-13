@@ -1,1 +1,0 @@
-This is going to be for the frontend of the webapp.
