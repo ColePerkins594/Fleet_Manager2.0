@@ -1,4 +1,5 @@
 --DROP STATEMENTS
+DROP TABLE IF EXISTS job;
 DROP TABLE IF EXISTS issue;
 DROP TABLE IF EXISTS service_record;
 DROP TABLE IF EXISTS operator_vehicle;
@@ -6,6 +7,8 @@ DROP TABLE IF EXISTS contact_point;
 DROP TABLE IF EXISTS vehicle;
 DROP TABLE IF EXISTS "user";
 DROP TABLE IF EXISTS account;
+DROP TYPE IF EXISTS user_status;
+DROP TYPE IF EXISTS vehicle_status;
 DROP TYPE IF EXISTS user_role;
 DROP TYPE IF EXISTS channel;
 DROP TYPE IF EXISTS drivetrain_type;
