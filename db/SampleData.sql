@@ -89,7 +89,7 @@ INSERT INTO job (description, start_time, end_time, vehicle_id, operator_id) VAL
 ('Transport supplies to warehouse', '2024-02-05 07:30:00', '2024-02-05 16:00:00', '5HGCV41JXMN109190', 3),
 ('Client meeting transport', '2024-02-10 09:00:00', '2024-02-10 14:00:00', '8HGCV41JXMN109193', 6),
 ('Weekly supply run', '2024-02-15 08:00:00', '2024-02-15 17:00:00', '1HGCV41JXMN109186', 2),
-('Equipment delivery', '2024-02-20 06:00:00', '2024-02-20 18:00:00', '10HGCV41JXMN109195', 12),
+('Equipment delivery', '2024-02-20 06:00:00', '2024-02-20 18:00:00', 'CHGCV41JXMN109197', 12),
 ('Service appointment transport', '2024-02-25 10:00:00', '2024-02-25 15:30:00', '4HGCV41JXMN109189', 3),
 ('Executive transport', '2024-03-01 07:00:00', '2024-03-01 17:00:00', '9HGCV41JXMN109194', 6),
 ('Package delivery route', '2024-03-05 08:30:00', '2024-03-05 18:00:00', 'BHGCV41JXMN109196', 2),
