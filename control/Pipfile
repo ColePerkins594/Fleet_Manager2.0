@@ -5,7 +5,8 @@ name = "pypi"
 
 [packages]
 fastapi = {extras = ["standard"], version = "*"}
-psycopg2-binary = "*"
+sqlalchemy = "*"
+psycopg2 = "*"
 
 [dev-packages]
 
