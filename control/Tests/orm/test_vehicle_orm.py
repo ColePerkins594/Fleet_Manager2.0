@@ -2,10 +2,6 @@ import os
 import sys
 import os
 from pathlib import Path
-DAO_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src/DAO"))
-DB_TOOLS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src/helpers/db_tools"))
-sys.path.insert(0, str(DAO_PATH))
-sys.path.insert(0, str(DB_TOOLS_PATH))
 from src.helpers.db_tools.enums import drivetrain_type, vehicle_status
 
 def test_fetch_vehicles_basic():

@@ -1,6 +1,6 @@
 from datetime import datetime
-from helpers.db_tools.enums import drivetrain_type, vehicle_status
-from helpers.db_tools.connection import Vehicle, get_session
+from src.helpers.db_tools.enums import drivetrain_type, vehicle_status
+from src.helpers.db_tools.connection import Vehicle, get_session
 
 class VehicleDAO:
     @staticmethod

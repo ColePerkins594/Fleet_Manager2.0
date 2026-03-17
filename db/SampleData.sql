@@ -39,7 +39,7 @@ INSERT INTO contact_point (channel, point, is_preffered, user_id) VALUES
 ('PHONE-SMS', '303-555-0108', true, 8);
 
 -- Insert 10+ vehicles related to the account
-INSERT INTO vehicle (vin, make, model, year, trim, milage, drivetrain, efficiency, range, license_plate, uptime, status, insert_date, account_id) VALUES
+INSERT INTO vehicle (vin, make, model, year, trim, mileage, drivetrain, efficiency, range, license_plate, uptime, status, insert_date, account_id) VALUES
 ('1HGCV41JXMN109186', 'Honda', 'Civic', 2022, 'EX', 15000, 'ICE', '28 mpg', NULL, 'ABC-001', 98.5, 'AVAILABLE', '2024-01-15 08:00:00', 1),
 ('2HGCV41JXMN109187', 'Toyota', 'Camry', 2021, 'LE', 28000, 'HYBRID', '52 mpg', NULL, 'ABC-002', 97.2, 'ON A JOB', '2024-02-20 09:30:00', 1),
 ('3HGCV41JXMN109188', 'Ford', 'Transit', 2023, 'Standard', 5000, 'ICE', '18 mpg', NULL, 'ABC-003', 99.1, 'AVAILABLE', '2024-03-10 07:15:00', 1),

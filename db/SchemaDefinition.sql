@@ -95,7 +95,7 @@ CREATE TABLE vehicle(
     model VARCHAR(50) NOT NULL,
     year INTEGER NOT NULL,
     trim VARCHAR(50),
-    milage INTEGER,
+    mileage INTEGER,
     drivetrain drivetrain_type NOT NULL,
     efficiency VARCHAR(20),
     range REAL,
