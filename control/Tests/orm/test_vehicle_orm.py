@@ -1,4 +1,3 @@
-from pathlib import Path
 from src.helpers.db_tools.enums import drivetrain_type, vehicle_status
 
 def test_fetch_vehicles_basic():
