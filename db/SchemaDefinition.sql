@@ -1,4 +1,5 @@
 --DROP STATEMENTS
+DROP TABLE IF EXISTS job;
 DROP TABLE IF EXISTS issue;
 DROP TABLE IF EXISTS service_record;
 DROP TABLE IF EXISTS operator_vehicle;
@@ -6,6 +7,8 @@ DROP TABLE IF EXISTS contact_point;
 DROP TABLE IF EXISTS vehicle;
 DROP TABLE IF EXISTS "user";
 DROP TABLE IF EXISTS account;
+DROP TYPE IF EXISTS user_status;
+DROP TYPE IF EXISTS vehicle_status;
 DROP TYPE IF EXISTS user_role;
 DROP TYPE IF EXISTS channel;
 DROP TYPE IF EXISTS drivetrain_type;
@@ -81,7 +84,7 @@ CREATE TABLE "user"(
 CREATE TABLE contact_point(
     contact_point_id SERIAL PRIMARY KEY,
     channel channel NOT NULL,
-    point VARCHAR(75) NOT NULL,
+    point VARCHAR(75) UNIQUE NOT NULL,
     is_preffered BOOLEAN NOT NULL,
     user_id INTEGER REFERENCES "user" (user_id)
 );
@@ -92,7 +95,7 @@ CREATE TABLE vehicle(
     model VARCHAR(50) NOT NULL,
     year INTEGER NOT NULL,
     trim VARCHAR(50),
-    milage INTEGER,
+    mileage INTEGER,
     drivetrain drivetrain_type NOT NULL,
     efficiency VARCHAR(20),
     range REAL,
