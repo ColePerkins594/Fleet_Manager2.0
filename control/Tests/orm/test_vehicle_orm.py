@@ -2,21 +2,21 @@ import os
 import sys
 import os
 from pathlib import Path
-
-DAO_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../DAO"))
-DB_TOOLS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../db_tools"))
+DAO_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src/DAO"))
+DB_TOOLS_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../src/helpers/db_tools"))
 sys.path.insert(0, str(DAO_PATH))
 sys.path.insert(0, str(DB_TOOLS_PATH))
+from src.helpers.db_tools.enums import drivetrain_type, vehicle_status
 
 def test_fetch_vehicles_basic():
-    from DAO.vehicle_dao import VehicleDAO
+    from src.DAO.vehicle_dao import VehicleDAO
     test_id = 1
     vehicles = VehicleDAO.fetch_vehicles(account_id=1)
     for vehicle in vehicles:
         assert vehicle.account_id == test_id
 
 def test_insert_vehicle():
-    from DAO.vehicle_dao import VehicleDAO
+    from src.DAO.vehicle_dao import VehicleDAO
     vin = "TESTVIN1234567890"
     make = "TestMake"
     model = "TestModel"
@@ -25,8 +25,8 @@ def test_insert_vehicle():
     account_id = 1
     trim = "TestTrim"
     mileage = 1000
-    status = "active"
-    drivetrain = "FWD"
+    status = vehicle_status.available.value
+    drivetrain = drivetrain_type.ev.value
     efficiency = 25.5
     range = 300.0
     license_plate = "TEST123"

@@ -1,17 +1,11 @@
-import os
-import sys
-import os
 from datetime import datetime
-from pathlib import Path
-
-my_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../"))
-sys.path.insert(0, str(my_path))
-from db_tools.connection import Vehicle, get_session
+from helpers.db_tools.enums import drivetrain_type, vehicle_status
+from helpers.db_tools.connection import Vehicle, get_session
 
 class VehicleDAO:
     @staticmethod
     def fetch_vehicles(account_id: int, vin: str = None, make: str = None, model: str = None, year: int = None,
-                       trim: str = None, mileage: int = None, status: str = None, drivetrain: str = None,
+                       uptime: float = None, trim: str = None, mileage: int = None, status: str = None, drivetrain: str = None,
                        efficiency: float = None, range: float = None, license_plate: str = None, operator_id: int = None, insert_date: str = None):
         filters = {"account_id": account_id}
         if vin:
@@ -34,6 +28,8 @@ class VehicleDAO:
             filters["efficiency"] = efficiency
         if range:
             filters["range"] = range
+        if uptime:
+            filters["uptime"] = uptime
         if license_plate:
             filters["license_plate"] = license_plate
         if operator_id:
@@ -64,8 +60,10 @@ class VehicleDAO:
                        license_plate: str = None, operator_id: int = None ):
         ts = datetime.now()
         session = get_session()
+        if ((drivetrain and drivetrain not in [d.value for d in drivetrain_type])|(status and status not in [s.value for s in vehicle_status])):
+            raise ValueError(f"Invalid argument value for drivetrain or status.")
         if session is None:
-            return False
+            raise ConnectionError("Failed to establish database connection")
         try:
             new_vehicle = Vehicle(vin=vin, make=make, model=model, year=year, trim=trim, uptime=uptime, account_id=account_id, mileage=mileage, status=status, drivetrain=drivetrain, efficiency=efficiency, range=range, license_plate=license_plate, operator_id=operator_id, insert_date=ts)
             session.add(new_vehicle)
@@ -75,7 +73,7 @@ class VehicleDAO:
         except Exception as e:
             print(f"Error occurred while inserting vehicle: {e}")
             session.rollback()
-            return False
+            raise RuntimeError(f"Error occurred while inserting vehicle: {e}")
         finally:
             session.close()
 
@@ -86,12 +84,12 @@ class VehicleDAO:
                        license_plate: str = None, operator_id: int = None):
         session = get_session()
         if session is None:
-            return False
+            raise ConnectionError("Failed to establish database connection")
         try:
             vehicle = session.query(Vehicle).filter(Vehicle.vin == vin).filter(Vehicle.account_id == account_id).first()
             if vehicle is None:
                 print(f"No vehicle found with VIN: {vin}")
-                return False
+                raise ValueError(f"No vehicle found with VIN: {vin}")
             if make:
                 vehicle.make = make
             if model:
@@ -105,9 +103,15 @@ class VehicleDAO:
             if mileage:
                 vehicle.mileage = mileage
             if status:
-                vehicle.status = status
-            if drivetrain:
-                vehicle.drivetrain = drivetrain
+                if status in [s.value for s in vehicle_status]:
+                    vehicle.status = status
+                else:
+                    raise ValueError(f"Invalid status value: {status}")
+            if (drivetrain and drivetrain in [d.value for d in drivetrain_type]):
+                if drivetrain in [d.value for d in drivetrain_type]:
+                    vehicle.drivetrain_type = drivetrain
+                else:
+                    raise ValueError(f"Invalid drivetrain value: {drivetrain}")
             if efficiency:
                 vehicle.efficiency = efficiency
             if range:
@@ -122,7 +126,7 @@ class VehicleDAO:
         except Exception as e:
             print(f"Error occurred while updating vehicle: {e}")
             session.rollback()
-            return False
+            raise RuntimeError(f"Error occurred while updating vehicle: {e}")
         finally:
             session.close()
 
