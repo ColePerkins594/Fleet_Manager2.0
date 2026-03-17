@@ -84,7 +84,7 @@ CREATE TABLE "user"(
 CREATE TABLE contact_point(
     contact_point_id SERIAL PRIMARY KEY,
     channel channel NOT NULL,
-    point VARCHAR(75) NOT NULL,
+    point VARCHAR(75) UNIQUE NOT NULL,
     is_preffered BOOLEAN NOT NULL,
     user_id INTEGER REFERENCES "user" (user_id)
 );
