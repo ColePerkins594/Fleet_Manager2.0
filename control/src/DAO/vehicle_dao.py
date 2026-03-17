@@ -57,7 +57,7 @@ class VehicleDAO:
     def insert_vehicle(vin: str, make: str, model: str, year: int, uptime: float, account_id: str,
                        trim: str = None, mileage: int = None, status: str = None,
                        drivetrain: str = None, efficiency: float = None, range: float = None,
-                       license_plate: str = None, operator_id: int = None ):
+                       license_plate: str = None):
         ts = datetime.now()
         session = get_session()
         if ((drivetrain and drivetrain not in [d.value for d in drivetrain_type])|(status and status not in [s.value for s in vehicle_status])):
@@ -65,7 +65,7 @@ class VehicleDAO:
         if session is None:
             raise ConnectionError("Failed to establish database connection")
         try:
-            new_vehicle = Vehicle(vin=vin, make=make, model=model, year=year, trim=trim, uptime=uptime, account_id=account_id, mileage=mileage, status=status, drivetrain=drivetrain, efficiency=efficiency, range=range, license_plate=license_plate, operator_id=operator_id, insert_date=ts)
+            new_vehicle = Vehicle(vin=vin, make=make, model=model, year=year, trim=trim, uptime=uptime, account_id=account_id, mileage=mileage, status=status, drivetrain=drivetrain, efficiency=efficiency, range=range, license_plate=license_plate, insert_date=ts)
             session.add(new_vehicle)
             session.commit()
             print(f"Inserted vehicle with VIN: {vin}")
@@ -118,8 +118,6 @@ class VehicleDAO:
                 vehicle.range = range
             if license_plate:
                 vehicle.license_plate = license_plate
-            if operator_id:
-                vehicle.operator_id = operator_id
             session.commit()
             print(f"Updated vehicle with VIN: {vin}")
             return True

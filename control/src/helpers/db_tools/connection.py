@@ -9,7 +9,7 @@ PORT = int(os.getenv("DBPORT"))
 DBNAME = os.getenv("DBNAME")
 Base = automap_base()
 engine = create_engine(f'postgresql+psycopg2://{USERNAME}:{PW}@{HOSTNAME}:{PORT}/{DBNAME}')
-Base.prepare(engine, reflect=True)
+Base.prepare(autoload_with=engine)
 
 # Access the table
 User = Base.classes.user
